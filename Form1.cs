@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.Entity;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TestPlanetsNum3
@@ -25,20 +19,27 @@ namespace TestPlanetsNum3
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            GetData();
         }
         private void GetData()
         {
-
+            comboBox1.DataSource = GetDP();
+            comboBox1.DisplayMember = "Name";
+            comboBox1.ValueMember = "Id";
         }
 
         private List<Planets> GetDP()
         {
             using (var db = new PlanetsContext())
             {
-                var plan = db.Planets.ToList();
-                return plan;
+                var planets = db.Planets.ToList();
+                return planets;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            GetData();
         }
     }
 }
