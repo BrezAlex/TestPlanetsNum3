@@ -7,6 +7,10 @@ namespace TestPlanetsNum3
 {
     public partial class Form1 : Form
     {
+        private double _m;
+        private double _r;
+        private double _h;
+        private const double G = 6.67e-11;
         public Form1()
         {
             InitializeComponent();
@@ -40,6 +44,27 @@ namespace TestPlanetsNum3
         private void button1_Click(object sender, EventArgs e)
         {
             GetData();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var planets = GetDP();
+            var id = int.Parse(comboBox1.SelectedValue.ToString());
+            _h = double.Parse(textBox3.Text);
+            _m = planets.FirstOrDefault(f => f.Id == id).M;
+            _r = planets.FirstOrDefault(f => f.Id == id).R;
+        }
+
+        private (double, double) Calc()
+        {
+            var v1 = Math.Sqrt((G*_m)/(_r+_h));
+            var v2 = Math.Sqrt(2)*v1;
+            return (v1, v2);
+        }
+        private void button4_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = Calc().Item1.ToString();
+            textBox2.Text = Calc().Item2.ToString();
         }
     }
 }
