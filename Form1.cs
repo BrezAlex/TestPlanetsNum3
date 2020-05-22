@@ -23,5 +23,22 @@ namespace TestPlanetsNum3
             var UDB = new UpdateDB(); //
             UDB.Show();
         }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+        private void GetData()
+        {
+
+        }
+
+        private List<Planets> GetDP()
+        {
+            using (var db = new PlanetsContext())
+            {
+                var plan = db.Planets.ToList();
+                return plan;
+            }
+        }
     }
 }
